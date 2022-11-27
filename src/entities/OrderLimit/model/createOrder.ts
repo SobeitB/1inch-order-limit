@@ -4,7 +4,7 @@ import Web3 from "web3";
 import {LimitOrderBuilder, Web3ProviderConnector} from "@1inch/limit-order-protocol";
 
 import {ADDRESS_LIMIT_ORDER, CHAIN_ID} from "shared/config";
-import {$input_sell, $input_sellPrice, $select_erc20} from "entities/OrderLimit";
+import {$erc20, $input_sell, $input_sellPrice, $select_erc20} from "entities/OrderLimit";
 import {AddOrderLimit} from "entities/OrderLimit";
 
 export const useCreateOrder = () => {
@@ -14,10 +14,11 @@ export const useCreateOrder = () => {
 
    const createOrder = async () => {
 
-      const sellPrice = selectToken.sell.price;
+      const price_in_native = selectToken.sell.price_in_native
 
-      const makerAmount = utils.parseUnits((sellPrice * +countSell).toFixed(6)).toString();
-      const takerAmount = utils.parseUnits((+sellWhatPrice * +countSell).toFixed(6)).toString();
+      const sellDecimals = selectToken.sell.decimals;
+      const makerAmount = utils.parseUnits((+price_in_native * +countSell).toFixed(sellDecimals), sellDecimals).toString();
+      const takerAmount = utils.parseUnits((+sellWhatPrice * +countSell).toFixed(sellDecimals), sellDecimals).toString();
 
       const {ethereum} = window;
       const [wallet] = await ethereum.request({method:"eth_accounts"})
@@ -52,7 +53,6 @@ export const useCreateOrder = () => {
          wallet,
          limitOrderTypedData
       );
-      // const createDateTime = new Date().toISOString();
 
       const limitOrderHash = await limitOrderBuilder.buildLimitOrderHash(
          limitOrderTypedData
@@ -62,10 +62,6 @@ export const useCreateOrder = () => {
          data:limitOrderTypedData.message,
          orderHash:limitOrderHash,
          signature,
-         // orderType: "active",
-         // remainingMakerAmount: limitOrderTypedData.message.makingAmount.toString(),
-         // chainId: +CHAIN_ID,
-         // createDateTime,
       });
 
 

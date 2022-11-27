@@ -20,11 +20,6 @@ const select_erc_init:TokensInfo = {
    tags: [""],
    price:0
 }
-export const $select_erc20 = createStore<selectsTokens>({
-   sell:select_erc_init,
-   buy:select_erc_init,
-})
-
 
 export const getPriceEtherFx = createEffect(async () => {
    const req = await request(GET_PRICE_ETH);
@@ -39,23 +34,30 @@ const getPriceToken = async () => {
    priceToken = await request(GET_TOKENS_PRICE);
 }
 
+export const $select_erc20 = createStore<selectsTokens>({
+   sell:select_erc_init,
+   buy:select_erc_init,
+})
+
 export const changeErc20 = createApi($select_erc20, {
    buy: (state, erc20) => {
       const {token, price_native} = erc20;
 
       const price:any = priceToken[token.address];
+      const price_in_native:any = +utils.formatUnits(price)
       return {
          ...state,
-         buy:{...token, price:+utils.formatUnits(price) * price_native}
+         buy:{...token, price:price_in_native * price_native, price_in_native,}
       }
    },
    sell: (state, erc20) => {
       const {token, price_native} = erc20;
 
       const price:any = priceToken[token.address];
+      const price_in_native:any = +utils.formatUnits(price)
       return {
          ...state,
-         sell:{...token, price:+utils.formatUnits(price) * price_native}
+         sell:{...token, price:price_in_native * price_native, price_in_native,}
       }
    },
 });

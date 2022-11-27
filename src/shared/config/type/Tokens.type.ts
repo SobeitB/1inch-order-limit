@@ -16,6 +16,7 @@ export interface TokensInfo {
    tags:string[];
 
    price?:number;
+   price_in_native?:number;
 }
 
 export type TokensType = Record<string, TokensInfo>;
