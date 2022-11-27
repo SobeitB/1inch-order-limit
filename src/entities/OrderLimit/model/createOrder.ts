@@ -61,10 +61,10 @@ export const useCreateOrder = () => {
          data:limitOrderTypedData.message,
          orderHash:limitOrderHash,
          signature,
-         orderType: "active",
-         remainingMakerAmount: limitOrderTypedData.message.makingAmount.toString(),
-         chainId: +CHAIN_ID,
-         createDateTime,
+         // orderType: "active",
+         // remainingMakerAmount: limitOrderTypedData.message.makingAmount.toString(),
+         // chainId: +CHAIN_ID,
+         // createDateTime,
       });
 
 
