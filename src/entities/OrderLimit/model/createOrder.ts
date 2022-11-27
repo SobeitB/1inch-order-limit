@@ -5,7 +5,7 @@ import {LimitOrderBuilder, Web3ProviderConnector} from "@1inch/limit-order-proto
 
 import {ADDRESS_LIMIT_ORDER, CHAIN_ID} from "shared/config";
 import {$input_sell, $input_sellPrice, $select_erc20} from "entities/OrderLimit";
-import {AddOrderLimit} from "entities/OrderLimit/api/addOrderLimit";
+import {AddOrderLimit} from "entities/OrderLimit";
 
 export const useCreateOrder = () => {
    const selectToken = useStore($select_erc20);
@@ -26,11 +26,11 @@ export const useCreateOrder = () => {
          makerAssetAddress: selectToken.sell.address,
          takerAssetAddress: selectToken.buy.address,
          makerAddress: wallet,
-         makerAmount:makerAmount,
-         takerAmount: takerAmount,
-         predicate: '0x0',
-         permit: '0x0',
-         interaction: '0x0',
+         makerAmount,
+         takerAmount,
+         predicate: '0x',
+         permit: '0x',
+         interaction: '0x',
       };
 
       const web3 = new Web3(Web3.givenProvider);
@@ -52,7 +52,7 @@ export const useCreateOrder = () => {
          wallet,
          limitOrderTypedData
       );
-      const createDateTime = new Date().toISOString();
+      // const createDateTime = new Date().toISOString();
 
       const limitOrderHash = await limitOrderBuilder.buildLimitOrderHash(
          limitOrderTypedData

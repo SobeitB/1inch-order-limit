@@ -14,6 +14,9 @@ interface AddOrderLimitProps {
 export const AddOrderLimit = async (settings:AddOrderLimitProps) => {
    const addOrder = await fetch(ADD_LIMIT_ORDER, {
       method:"POST",
+      "headers": {
+         "content-type": "application/json",
+      },
       body:JSON.stringify(settings)
    })
    const addOrderJson = await addOrder.json()
