@@ -15,8 +15,9 @@ export const useCreateOrder = () => {
    const createOrder = async () => {
 
       const sellPrice = selectToken.sell.price;
-      const makerAmount = utils.parseUnits((sellPrice * +countSell).toString()).toString();
-      const takerAmount = utils.parseUnits((+sellWhatPrice * +countSell).toString()).toString();
+
+      const makerAmount = utils.parseUnits((sellPrice * +countSell).toFixed(6)).toString();
+      const takerAmount = utils.parseUnits((+sellWhatPrice * +countSell).toFixed(6)).toString();
 
       const {ethereum} = window;
       const [wallet] = await ethereum.request({method:"eth_accounts"})

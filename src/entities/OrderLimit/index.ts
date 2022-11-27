@@ -17,6 +17,7 @@ export {
 
    $isApproveToken,
    setApprove,
+   setChangeToken,
 
    useCreateOrder
 } from './model'

@@ -10,7 +10,7 @@ import {
 import {TokensInfo} from "shared/config/type/Tokens.type";
 import {TokensSort} from "shared/config";
 import {useNavigationTokens} from "../";
-import {$erc20, $price_eth, changeErc20} from "entities/OrderLimit";
+import {$erc20, $price_eth, changeErc20, setChangeToken} from "entities/OrderLimit";
 
 interface MenuTokensProps {
    isOpen:boolean;
@@ -25,6 +25,7 @@ export const MenuTokens = ({isOpen, setOpen, methodChange}:MenuTokensProps) => {
 
    const selectToken = useCallback((address:string, token:TokensInfo) => () => {
       changeErc20[methodChange]({token, price_native,});
+      setChangeToken()
       setOpen();
    }, [changeErc20, tokens, setOpen, price_native])
 

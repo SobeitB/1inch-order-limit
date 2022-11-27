@@ -18,7 +18,8 @@ export {
 
 export {
    $isApproveToken,
-   setApprove
+   setApprove,
+   setChangeToken
 } from './state/stateIsApprove'
 
 export {
