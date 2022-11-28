@@ -1,7 +1,7 @@
-import {Globals} from "app/styles";
-import {withProviders} from "app/providers";
-import {Navigation} from "widgets/Navigation";
+import {Globals, Main} from "app/styles";
 import {useConnect} from "entities/Viewer";
+import {ActiveLimitOrders} from "pages/ActiveLimitOrders";
+import {CreateLimitOrder} from "pages/CreateLimitOrder";
 
 declare global {
    interface Window {
@@ -10,13 +10,16 @@ declare global {
 }
 
 const App = () => {
-   useConnect()
+   useConnect();
+
    return(
-      <>
-         <Navigation />
+      <Main>
          <Globals />
-      </>
+
+         <ActiveLimitOrders />
+         <CreateLimitOrder />
+      </Main>
    )
 }
 
-export default withProviders(App);
+export default App;

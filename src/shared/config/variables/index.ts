@@ -9,6 +9,7 @@ export {
    GET_PRICE_ETH,
    GET_TOKENS,
    GET_TOKENS_PRICE,
+   GET_TOKENS_BALANCE,
    ADD_LIMIT_ORDER,
    ACTIVE_LIMIT_ORDERS
 } from './api';

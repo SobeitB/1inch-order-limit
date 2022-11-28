@@ -1,4 +1,4 @@
 
-export {$getActiveOrders, getActiveOrdersFx} from './state/stateActiveOrder'
+export {$getActiveOrders} from './state/stateActiveOrder'
 
 export {useCancelOrder} from './cancelOrder';

@@ -17,9 +17,17 @@ export interface TokensInfo {
 
    price?:number;
    price_in_native?:number;
+   balance?:string;
+}
+
+export interface BalanceInfo {
+   balance:string;
+   allowance:string;
 }
 
 export type TokensType = Record<string, TokensInfo>;
+export type Prices = Record<string, string>;
+export type Balances = Record<string, BalanceInfo>;
 
 export interface selectsTokens {
    sell:TokensInfo,

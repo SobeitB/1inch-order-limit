@@ -9,8 +9,16 @@ export const WrapperInside = styled.div
    `
   width:100%;
   display: flex;
+  flex-direction: column;
   justify-content: ${props => props.isCenter ? 'center' : 'space-between'};
   align-items: center;
 
-  margin-bottom:30px;
+  margin-bottom:10px;
+  ${props => props.isCenter && `
+      margin-bottom:15px;
+      background: #06070A;
+      width:90%;
+      padding: 15px;
+      border-radius: 15px;
+  `}
 `

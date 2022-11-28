@@ -1,10 +1,15 @@
 import {useStore} from "effector-react";
-import {BigNumber, utils} from "ethers";
+import {utils} from "ethers";
 import Web3 from "web3";
-import {LimitOrderBuilder, Web3ProviderConnector} from "@1inch/limit-order-protocol";
+import {
+   LimitOrderBuilder,
+   LimitOrderPredicateBuilder,
+   LimitOrderProtocolFacade,
+   Web3ProviderConnector
+} from "@1inch/limit-order-protocol";
 
 import {ADDRESS_LIMIT_ORDER, CHAIN_ID} from "shared/config";
-import {$erc20, $input_sell, $input_sellPrice, $select_erc20} from "entities/OrderLimit";
+import { $input_sell, $input_sellPrice, $select_erc20} from "entities/OrderLimit";
 import {AddOrderLimit} from "entities/OrderLimit";
 
 export const useCreateOrder = () => {
@@ -22,6 +27,22 @@ export const useCreateOrder = () => {
 
       const {ethereum} = window;
       const [wallet] = await ethereum.request({method:"eth_accounts"})
+      const web3 = new Web3(Web3.givenProvider);
+      const connector = new Web3ProviderConnector(web3);
+
+      const limitOrderProtocolFacade = new LimitOrderProtocolFacade(ADDRESS_LIMIT_ORDER, connector);
+      const limitOrderPredicateBuilder = new LimitOrderPredicateBuilder(
+         limitOrderProtocolFacade
+      );
+      const limitOrderBuilder = new LimitOrderBuilder(
+         ADDRESS_LIMIT_ORDER,
+         +CHAIN_ID,
+         connector
+      );
+
+      const nonce = await limitOrderProtocolFacade.nonce(ADDRESS_LIMIT_ORDER);
+
+      const predicate = limitOrderPredicateBuilder.nonceEquals(wallet, nonce);
 
       const configLimitOrder = {
          makerAssetAddress: selectToken.sell.address,
@@ -29,19 +50,10 @@ export const useCreateOrder = () => {
          makerAddress: wallet,
          makerAmount,
          takerAmount,
-         predicate: '0x',
+         predicate,
          permit: '0x',
          interaction: '0x',
       };
-
-      const web3 = new Web3(Web3.givenProvider);
-      const connector = new Web3ProviderConnector(web3);
-
-      const limitOrderBuilder = new LimitOrderBuilder(
-         ADDRESS_LIMIT_ORDER,
-         +CHAIN_ID,
-         connector
-      );
 
       const limitOrder = limitOrderBuilder.buildLimitOrder(configLimitOrder);
 
@@ -63,7 +75,6 @@ export const useCreateOrder = () => {
          orderHash:limitOrderHash,
          signature,
       });
-
 
    }
 

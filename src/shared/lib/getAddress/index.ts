@@ -1,4 +1,4 @@
 
-export const getAddress = async () => (
-   await window.ethereum.request({method:"eth_accounts"})[0]
-)
+export const getAddress = async () => {
+   return await window.ethereum.request({method:"eth_accounts"})[0]
+}

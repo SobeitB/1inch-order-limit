@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
 
 export const Globals = createGlobalStyle`
   * {
@@ -18,6 +18,7 @@ export const Globals = createGlobalStyle`
 
   html, body {
     height: 100%;
+    background: #06070A;
   }
   
   #root{
@@ -27,5 +28,15 @@ export const Globals = createGlobalStyle`
 
   main{
     flex: 1 1 auto;
+  }
+`
+
+export const Main = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media(max-width: 770px) {
+    flex-direction: column;
   }
 `

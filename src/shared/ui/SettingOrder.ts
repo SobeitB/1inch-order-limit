@@ -6,6 +6,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media(max-width: 450px) {
+    width: 95%;
+  }
 `
 
 export const Input = styled.input`
@@ -22,5 +26,9 @@ export const Input = styled.input`
   }
   &::placeholder {
     color:white;
+  }
+  
+  @media(max-width: 350px) {
+    width: 80%;
   }
 `

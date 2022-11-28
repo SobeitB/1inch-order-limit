@@ -4,6 +4,8 @@ import {ethers} from "ethers";
 import {CHAIN_ID} from "shared/config";
 import {UserType} from "shared/config";
 import {connectWallet} from './state/stateUser'
+import {callAllFuncTokens,} from "shared/api/tokens";
+import {callAllFuncOrders} from "shared/api/orders";
 
 export const useConnect = () => {
    const onConnectWallet = (isMouting:boolean) => async () => {
@@ -34,6 +36,9 @@ export const useConnect = () => {
          }
 
          connectWallet(info);
+
+         callAllFuncTokens()
+         callAllFuncOrders()
       }
    }
 

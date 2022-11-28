@@ -10,6 +10,7 @@ export {
    GET_TOKENS_PRICE,
    ADD_LIMIT_ORDER,
    ACTIVE_LIMIT_ORDERS,
+   GET_TOKENS_BALANCE,
 } from './variables'
 
 // type
@@ -20,4 +21,8 @@ export {
    TokensType,
    TokensInfo,
    ActiveOrderType,
+   TokensProps,
+   Prices,
+   BalanceInfo,
+   Balances,
 } from './type'
