@@ -1,11 +1,18 @@
 
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 45%;
+interface ContainerProps {
+   widthCont:string;
+}
+
+export const Container = styled.div
+   .attrs((props:ContainerProps) => props)
+   `
+  width: ${props => props.widthCont}%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 7px;
 
   @media(max-width: 450px) {
     width: 95%;
@@ -13,7 +20,7 @@ export const Container = styled.div`
 `
 
 export const Input = styled.input`
-  min-width: 55%;
+  width: 100%;
   height: 50px;
   background: #324054;
   border: none;

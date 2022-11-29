@@ -1,4 +1,5 @@
 import {useStore} from "effector-react";
+import {useForm} from "effector-forms";
 import {utils} from "ethers";
 import Web3 from "web3";
 import {
@@ -9,15 +10,17 @@ import {
 } from "@1inch/limit-order-protocol";
 
 import {ADDRESS_LIMIT_ORDER, CHAIN_ID} from "shared/config";
-import { $input_sell, $input_sellPrice, $select_erc20} from "entities/OrderLimit";
+import {$createOrderForm, $select_erc20} from "entities/OrderLimit";
 import {AddOrderLimit} from "entities/OrderLimit";
 
 export const useCreateOrder = () => {
    const selectToken = useStore($select_erc20);
-   const sellWhatPrice = useStore($input_sellPrice);
-   const countSell = useStore($input_sell);
+   const { fields } = useForm($createOrderForm);
 
    const createOrder = async () => {
+      const countSell = fields.countSell.value;
+      const sellWhatPrice = fields.sellPrice.value;
+      const dateExpires = +fields.dateExpires.value * 60;
 
       const price_in_native = selectToken.sell.price_in_native
       const sellDecimals = selectToken.sell.decimals;
@@ -48,7 +51,7 @@ export const useCreateOrder = () => {
 
       const nonceOrder = await limitOrderProtocolFacade.nonce(wallet);
 
-      const timeStamp = timestampBelow(Math.round(Date.now() / 1000) + 60);
+      const timeStamp = timestampBelow(Math.round(Date.now() / 1000) + dateExpires);
       const nonce = nonceEquals(wallet, nonceOrder);
       const predicate = and(timeStamp, nonce);
 
@@ -84,6 +87,7 @@ export const useCreateOrder = () => {
          data:limitOrderTypedData.message,
          orderHash:limitOrderHash,
          signature,
+         chainId:+CHAIN_ID,
       });
 
    }

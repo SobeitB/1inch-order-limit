@@ -1,21 +1,26 @@
 import {useStore} from "effector-react";
 
 import {Wrapper} from "shared/ui/Wrapper";
-import {OrdersRow} from "entities/ActiveOrder";
+import {$getActiveOrders, OrdersRow} from "entities/ActiveOrder";
 import {$user, ConnectWallet} from "entities/Viewer";
 
 const ActiveLimitOrders = () => {
    const {signer} = useStore($user);
+   const {orders, isLoading} = useStore($getActiveOrders);
 
-   return(
-      <Wrapper>
-         {signer ?
-            <OrdersRow />
-            :
-            <ConnectWallet />
-         }
-      </Wrapper>
-   )
+   if(orders.length > 0 && !isLoading) {
+      return(
+         <Wrapper>
+            {signer ?
+               <OrdersRow />
+               :
+               <ConnectWallet />
+            }
+         </Wrapper>
+      )
+   }
+
+   return null;
 }
 
 export default ActiveLimitOrders

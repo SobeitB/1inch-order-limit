@@ -26,6 +26,17 @@ export const conversionOrderData = (payload:ActiveOrderType[]):ActiveOrderUiType
    return ordersUi
 }
 
-export const $getActiveOrders = createStore<ActiveOrderUiType[]>([])
-   .on(getActiveOrdersFx.doneData, (state, payload:ActiveOrderType[]) => conversionOrderData(payload))
+interface activeOrders {
+   orders:ActiveOrderUiType[];
+   isLoading:boolean;
+}
+const activeOrders_init:activeOrders = {
+   orders:[],
+   isLoading:true,
+}
 
+export const $getActiveOrders = createStore<activeOrders>(activeOrders_init)
+   .on(getActiveOrdersFx.doneData, (state, payload:ActiveOrderType[]) => ({
+      orders: conversionOrderData(payload),
+      isLoading: false,
+   }))

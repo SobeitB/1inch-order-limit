@@ -9,11 +9,8 @@ export {
    $select_erc20,
    changeErc20,
 
-   $input_sell,
-   setInput,
-
-   $input_sellPrice,
-   setInputSellPrice,
+   $createOrderForm,
+   createOrderFx,
 
    $isApproveToken,
    setApprove,

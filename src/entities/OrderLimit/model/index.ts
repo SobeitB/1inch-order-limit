@@ -7,14 +7,9 @@ export {
 } from './state/stateTokens';
 
 export {
-   $input_sell,
-   setInput
-} from './state/stateInputSell'
-
-export {
-   $input_sellPrice,
-   setInputSellPrice
-} from './state/stateInputPrice'
+   $createOrderForm,
+   createOrderFx
+} from './state/stateForm'
 
 export {
    $isApproveToken,

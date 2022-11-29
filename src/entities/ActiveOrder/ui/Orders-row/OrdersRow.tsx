@@ -5,7 +5,7 @@ import {Error} from "shared/ui/Text";
 import {$getActiveOrders, Order, useCancelOrder} from "entities/ActiveOrder";
 
 export const OrdersRow = () => {
-   const orders = useStore($getActiveOrders);
+   const {orders} = useStore($getActiveOrders);
    const cancelOrder = useCancelOrder();
 
    return(

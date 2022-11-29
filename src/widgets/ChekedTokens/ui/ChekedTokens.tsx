@@ -1,18 +1,19 @@
+import {useMemo} from "react";
 import {useStore} from "effector-react";
+import {useForm} from "effector-forms";
 
 import {BodyTokens, Info, TokensWrapper} from "./styled";
-import {$input_sell, $select_erc20} from "entities/OrderLimit";
+import {$createOrderForm, $select_erc20} from "entities/OrderLimit";
 import {TokensProps, TokensSort} from "shared/config";
 import {TextInfo} from "shared/ui/Text";
 import {WrappedMenu} from "features/MenuTokens";
 import {PriceTokens} from "features/PriceTokens";
 import {InputTokens} from "features/InputTokens";
-import {useMemo} from "react";
 
 export const ChekedTokens = ({methodChange}:TokensProps) => {
    const select_tokens = useStore($select_erc20);
-   const current_token = useMemo(() => select_tokens[methodChange], [select_tokens, methodChange])
-   const count = useStore($input_sell);
+   const current_token = useMemo(() => select_tokens[methodChange], [select_tokens, methodChange]);
+   const { fields } = useForm($createOrderForm);
 
    return(
       <TokensWrapper>
@@ -31,7 +32,7 @@ export const ChekedTokens = ({methodChange}:TokensProps) => {
             <PriceTokens
                methodChange={methodChange}
                select_token={select_tokens}
-               count={count}
+               count={fields.countSell.value}
             />
          </Info>
       </TokensWrapper>

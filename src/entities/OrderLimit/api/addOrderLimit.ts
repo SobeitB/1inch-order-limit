@@ -5,6 +5,7 @@ interface AddOrderLimitProps {
    data:EIP712Object;
    orderHash:string;
    signature:string;
+   chainId: number;
 }
 
 export const AddOrderLimit = async (settings:AddOrderLimitProps) => {

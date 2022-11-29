@@ -5,6 +5,7 @@ import {Wrapper} from "shared/ui/Wrapper";
 import {ChekedTokens} from "widgets/ChekedTokens";
 import {IsConnected} from "widgets/IsConnected";
 import {SellPrice} from "features/SellPrice";
+import {DateExperires} from "features/DateExpires/ui";
 
 const CreateLimitOrder = () => {
    return(
@@ -21,8 +22,10 @@ const CreateLimitOrder = () => {
 
          </WrapperInside>
 
-         <WrapperInside isCenter>
+         <WrapperInside isSetting>
             <SellPrice />
+
+            <DateExperires />
          </WrapperInside>
 
          <IsConnected />
