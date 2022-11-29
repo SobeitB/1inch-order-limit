@@ -42,9 +42,5 @@ export const useConnect = () => {
       }
    }
 
-   useEffect(() => {
-      onConnectWallet(true)()
-   }, [onConnectWallet])
-
    return onConnectWallet
 }

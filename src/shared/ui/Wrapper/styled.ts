@@ -35,7 +35,20 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    margin-top: 24px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 20px;
+  }
+
+
   @media(max-width: 1100px) {
     max-width:400px;
   }

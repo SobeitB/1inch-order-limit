@@ -10,5 +10,5 @@ export {
    BalanceInfo,
    Balances,
 } from './Tokens.type';
-export {ActiveOrderType} from './ActiveOrder.type';
+export {ActiveOrderType, ActiveOrderUiType,} from './ActiveOrder.type';
 

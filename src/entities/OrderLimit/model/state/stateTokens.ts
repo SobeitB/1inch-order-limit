@@ -12,7 +12,6 @@ import {
    getTokensFx,
    priceToken,
    balanceToken,
-   callAllFuncTokens
 } from "shared/api/tokens";
 
 
@@ -64,5 +63,3 @@ export const changeErc20 = createApi($select_erc20, {
    buy: (state, erc20) => changeErc20Utils(state,erc20,TokensSort.BUY),
    sell: (state, erc20) => changeErc20Utils(state,erc20,TokensSort.SELL),
 });
-
-callAllFuncTokens()

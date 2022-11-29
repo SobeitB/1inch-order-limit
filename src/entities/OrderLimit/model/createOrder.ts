@@ -20,10 +20,11 @@ export const useCreateOrder = () => {
    const createOrder = async () => {
 
       const price_in_native = selectToken.sell.price_in_native
-
       const sellDecimals = selectToken.sell.decimals;
+
       const makerAmount = utils.parseUnits((+price_in_native * +countSell).toFixed(sellDecimals), sellDecimals).toString();
       const takerAmount = utils.parseUnits((+sellWhatPrice * +countSell).toFixed(sellDecimals), sellDecimals).toString();
+
 
       const {ethereum} = window;
       const [wallet] = await ethereum.request({method:"eth_accounts"})
@@ -39,10 +40,19 @@ export const useCreateOrder = () => {
          +CHAIN_ID,
          connector
       );
+      const {
+         timestampBelow,
+         nonceEquals,
+         and
+      } = limitOrderPredicateBuilder;
 
-      const nonce = await limitOrderProtocolFacade.nonce(ADDRESS_LIMIT_ORDER);
+      const nonceOrder = await limitOrderProtocolFacade.nonce(wallet);
 
-      const predicate = limitOrderPredicateBuilder.nonceEquals(wallet, nonce);
+      const timeStamp = timestampBelow(Math.round(Date.now() / 1000) + 60);
+      const nonce = nonceEquals(wallet, nonceOrder);
+      const predicate = and(timeStamp, nonce);
+
+      // const predicate = limitOrderPredicateBuilder.nonceEquals(wallet, nonce);
 
       const configLimitOrder = {
          makerAssetAddress: selectToken.sell.address,

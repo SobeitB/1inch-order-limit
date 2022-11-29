@@ -1,7 +1,7 @@
 import {useStore} from "effector-react";
 
+import {Body, CancelAll} from "./styled";
 import {Error} from "shared/ui/Text";
-import {Button} from "shared/ui/Button";
 import {$getActiveOrders, Order, useCancelOrder} from "entities/ActiveOrder";
 
 export const OrdersRow = () => {
@@ -9,16 +9,16 @@ export const OrdersRow = () => {
    const cancelOrder = useCancelOrder();
 
    return(
-      <div>
-         <Button onClick={cancelOrder(undefined, true)}>delete all</Button>
+      <Body>
+         <CancelAll onClick={cancelOrder(undefined, true)}>delete all</CancelAll>
 
          {orders.length > 0 ? orders.map((order) => (
-            <Order key={order.createDateTime} orderData={{orderHash:order.orderHash,date:order.data}} />
+            <Order key={order.hash} order={order} />
          ))
          :
          <Error>There are no active orders</Error>
          }
-      </div>
+      </Body>
    );
 }
 

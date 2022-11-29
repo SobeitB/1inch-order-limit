@@ -22,7 +22,7 @@ export const useCancelOrder = () => {
 
       let callData;
       if(isAll) {
-         callData = limitOrderProtocolFacade.increaseNonce();
+         callData = limitOrderProtocolFacade.advanceNonce(1);
       } else {
          callData = limitOrderProtocolFacade.cancelLimitOrder(order);
       }

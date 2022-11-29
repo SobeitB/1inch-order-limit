@@ -11,6 +11,7 @@ export {
    ADD_LIMIT_ORDER,
    ACTIVE_LIMIT_ORDERS,
    GET_TOKENS_BALANCE,
+   GET_LOGO,
 } from './variables'
 
 // type
@@ -21,6 +22,7 @@ export {
    TokensType,
    TokensInfo,
    ActiveOrderType,
+   ActiveOrderUiType,
    TokensProps,
    Prices,
    BalanceInfo,

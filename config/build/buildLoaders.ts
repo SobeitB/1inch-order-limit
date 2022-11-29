@@ -8,8 +8,18 @@ export function buildLoaders():webpack.RuleSetRule[] {
       exclude: /node_modules/,
    }
 
+   const fileLoader = {
+      test: /\.(png|svg|jpg|gif)$/,
+      use: [
+         'file-loader',
+      ],
+      options: {
+         outputPath: 'images'
+      }
+   }
 
    return [
       tsLoader,
+      fileLoader,
    ]
 }

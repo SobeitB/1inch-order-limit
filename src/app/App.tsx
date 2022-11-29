@@ -1,3 +1,5 @@
+import {useEffect} from "react";
+
 import {Globals, Main} from "app/styles";
 import {useConnect} from "entities/Viewer";
 import {ActiveLimitOrders} from "pages/ActiveLimitOrders";
@@ -10,7 +12,11 @@ declare global {
 }
 
 const App = () => {
-   useConnect();
+   const onConnectWallet = useConnect();
+
+   useEffect(() => {
+      onConnectWallet(true)()
+   }, [onConnectWallet])
 
    return(
       <Main>

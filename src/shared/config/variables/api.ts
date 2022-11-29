@@ -16,3 +16,7 @@ export const GET_TOKENS_BALANCE = async () => {
    const [wallet] = await window.ethereum.request({method:"eth_accounts"});
    return `https://balances.1inch.io/v1.1/${CHAIN_ID}/allowancesAndBalances/${ADDRESS_LIMIT_ORDER.toLowerCase()}/${wallet}?tokensFetchType=listedTokens`;
 }
+
+export const GET_LOGO = (address:string) => (
+   `https://tokens.1inch.io/${address}.png`
+)
