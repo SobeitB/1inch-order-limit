@@ -1,17 +1,14 @@
-import {Container, Delete, Item, ItemLogo, ItemTitle, TextCenter} from "./styled";
-// @ts-ignore
-import delete_icon from "./images/delete.png";
+import {Container, Item, ItemLogo, ItemTitle, TextCenter} from "./styled";
 import {ActiveOrderUiType} from "shared/config";
 import {Image} from "shared/ui/Image";
 import {Text} from 'shared/ui/Text'
-import {useCancelOrder} from "entities/ActiveOrder";
+import {CancelOrder, CancelOrderType} from "features/CancelOrders";
 
 interface OrderProps {
-   order:ActiveOrderUiType
+   order:ActiveOrderUiType,
 }
 
 export const Order = ({order}:OrderProps) => {
-   const cancelOrder = useCancelOrder();
 
    return(
       <Container>
@@ -49,11 +46,10 @@ export const Order = ({order}:OrderProps) => {
          </Item>
 
          <Item>
-            <Delete onClick={cancelOrder(order.data)}>
-               <Image
-                  src={delete_icon}
-               />
-            </Delete>
+            <CancelOrder
+               type={CancelOrderType.SINGLE}
+               data={order.data}
+            />
          </Item>
       </Container>
    )

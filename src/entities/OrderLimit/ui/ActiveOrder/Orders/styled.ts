@@ -32,29 +32,20 @@ export const Item = styled.div`
 
 export const ItemTitle = styled(TextInfo)`
   margin: 0;
+
+  @media(max-width:1100px) {
+    font-size: 12px;
+  }
 `
 
 export const TextCenter = styled.div`
   margin: auto 0;
+  @media(max-width:1100px) {
+    font-size: 14px;
+  }
 `
 
 export const ItemLogo = styled.div`
   width: 40px;
   height: 40px;
-`
-
-export const Delete = styled.button`
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-  margin: auto;
-  border-radius: 9px;
-  
-  &:hover{
-    background: rgba(193, 61, 84, .4);
-    color:#FF8078;
-  }
 `

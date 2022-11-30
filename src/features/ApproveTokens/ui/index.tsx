@@ -1,5 +1,5 @@
 import {Button} from "shared/ui/Button";
-import {useApproveToken} from "entities/OrderLimit/model/approveToken";
+import {useApproveToken} from "features/ApproveTokens";
 
 export const ApproveTokens = () => {
    const ApproveToken = useApproveToken();

@@ -1,7 +1,9 @@
 import {useStore} from "effector-react";
 
 import {Wrapper} from "shared/ui/Wrapper";
-import {$getActiveOrders, OrdersRow} from "entities/ActiveOrder";
+import {Loading} from "shared/ui/Loading";
+import {$getActiveOrders} from "entities/OrderLimit";
+import {ActiveOrders} from "widgets/ActiveOrders/ui";
 import {$user, ConnectWallet} from "entities/Viewer";
 
 const ActiveLimitOrders = () => {
@@ -12,12 +14,16 @@ const ActiveLimitOrders = () => {
       return(
          <Wrapper>
             {signer ?
-               <OrdersRow />
+               <ActiveOrders />
                :
                <ConnectWallet />
             }
          </Wrapper>
       )
+   }
+
+   if(isLoading) {
+      return <Loading />
    }
 
    return null;

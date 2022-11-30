@@ -1,6 +1,6 @@
 
 import {Button} from 'shared/ui/Button'
-import {useCreateOrder} from "entities/OrderLimit";
+import {useCreateOrder} from "features/CreateOrder";
 
 export const CreateOrder = () => {
    const createOrder = useCreateOrder();

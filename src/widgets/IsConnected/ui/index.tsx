@@ -1,7 +1,7 @@
 import {useStore} from "effector-react";
 
+import {OrderLimit} from "./OrderLimit";
 import {$user, ConnectWallet} from "entities/Viewer";
-import {OrderLimit} from "entities/OrderLimit";
 
 export const IsConnected = () => {
    const {address} = useStore($user);
