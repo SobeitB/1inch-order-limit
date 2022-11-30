@@ -16,8 +16,8 @@ export interface ActiveOrderType {
 
 export interface ActiveOrderUiType {
    createDateTime:string,
-   logoMaker:string,
-   logoTaker:string,
+   addressMaker:string,
+   addressTaker:string,
    takerRate:string,
    makerRate:string,
    hash:string;

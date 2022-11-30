@@ -18,6 +18,7 @@
     "effector-forms": "^0.0.24",
     "effector-react": "^22.3.4",
     "ethers": "^5.7.2",
+    "patronum": "^1.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6",

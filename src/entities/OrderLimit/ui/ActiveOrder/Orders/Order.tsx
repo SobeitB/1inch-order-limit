@@ -1,14 +1,18 @@
+import {useStore} from "effector-react";
+
 import {Container, Item, ItemLogo, ItemTitle, TextCenter} from "./styled";
 import {ActiveOrderUiType} from "shared/config";
 import {Image} from "shared/ui/Image";
 import {Text} from 'shared/ui/Text'
 import {CancelOrder, CancelOrderType} from "features/CancelOrders";
+import {$erc20} from "entities/OrderLimit";
 
 interface OrderProps {
    order:ActiveOrderUiType,
 }
 
 export const Order = ({order}:OrderProps) => {
+   const erc20 = useStore($erc20);
 
    return(
       <Container>
@@ -16,7 +20,7 @@ export const Order = ({order}:OrderProps) => {
             <ItemTitle>You sell</ItemTitle>
             <ItemLogo>
                <Image
-                  src={order.logoMaker}
+                  src={erc20[order.addressMaker].logoURI}
                />
             </ItemLogo>
          </Item>
@@ -25,7 +29,7 @@ export const Order = ({order}:OrderProps) => {
             <ItemTitle>You buy</ItemTitle>
             <ItemLogo>
               <Image
-                  src={order.logoMaker}
+                  src={erc20[order.addressTaker].logoURI}
                />
             </ItemLogo>
          </Item>
