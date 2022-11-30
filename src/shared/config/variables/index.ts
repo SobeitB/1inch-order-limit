@@ -12,5 +12,6 @@ export {
    GET_TOKENS_BALANCE,
    ADD_LIMIT_ORDER,
    ACTIVE_LIMIT_ORDERS,
-   GET_LOGO
+   GET_LOGO,
+   GET_NEW_ORDER,
 } from './api';

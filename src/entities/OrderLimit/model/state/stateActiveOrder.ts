@@ -1,4 +1,4 @@
-import {createStore} from 'effector';
+import {createEvent, createStore} from 'effector';
 
 import {ActiveOrderType} from "shared/config";
 import {getActiveOrdersFx} from "shared/api/orders";
@@ -35,8 +35,27 @@ const activeOrders_init:activeOrders = {
    isLoading:true,
 }
 
+type hashOrder = string;
+
+export const addActiveOrder = createEvent<ActiveOrderUiType>();
+export const removeSingleOrder = createEvent<hashOrder>();
+export const removeAllOrders = createEvent();
+
 export const $getActiveOrders = createStore<activeOrders>(activeOrders_init)
    .on(getActiveOrdersFx.doneData, (state, payload:ActiveOrderType[]) => ({
       orders: conversionOrderData(payload),
       isLoading: false,
    }))
+   .on(addActiveOrder, (state, payload:ActiveOrderUiType) => ({
+      orders: [payload,...state.orders],
+      isLoading: state.isLoading,
+   }))
+   .on(removeSingleOrder, (state, hashOrder) => ({
+      orders: state.orders.filter((order) => order.hash !== String(hashOrder)),
+      isLoading: state.isLoading,
+   }))
+   .on(removeAllOrders, (state, hashOrder) => ({
+      orders: [],
+      isLoading: state.isLoading,
+   }))
+

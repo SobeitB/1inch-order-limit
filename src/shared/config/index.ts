@@ -12,6 +12,7 @@ export {
    ACTIVE_LIMIT_ORDERS,
    GET_TOKENS_BALANCE,
    GET_LOGO,
+   GET_NEW_ORDER,
 } from './variables'
 
 // type

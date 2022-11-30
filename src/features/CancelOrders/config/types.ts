@@ -7,5 +7,8 @@ export enum CancelOrderType {
 
 export interface CancelOrderProps {
    type:CancelOrderType;
-   data?:LimitOrder;
+   data?:{
+      data:LimitOrder;
+      hash:string;
+   };
 }

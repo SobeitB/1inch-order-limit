@@ -48,7 +48,10 @@ export const Order = ({order}:OrderProps) => {
          <Item>
             <CancelOrder
                type={CancelOrderType.SINGLE}
-               data={order.data}
+               data={{
+                  data:order.data,
+                  hash:order.hash
+               }}
             />
          </Item>
       </Container>

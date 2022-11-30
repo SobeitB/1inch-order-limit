@@ -10,11 +10,11 @@ export const CancelOrder = ({type, data}:CancelOrderProps) => {
    return(
       <div>
          {type === CancelOrderType.ALL ?
-            <CancelAll >
+            <CancelAll onClick={cancelOrder(undefined, true)}>
                Cancel all orders
             </CancelAll>
             :
-            <Delete onClick={cancelOrder(data)}>
+            <Delete onClick={cancelOrder(data)} >
                <Image
                   src={delete_icon}
                />

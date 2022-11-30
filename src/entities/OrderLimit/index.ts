@@ -14,6 +14,10 @@ export {
    setChangeToken,
 
    $getActiveOrders,
+   addActiveOrder,
+   removeSingleOrder,
+   removeAllOrders,
+   conversionOrderData,
 } from './model'
 
 export {

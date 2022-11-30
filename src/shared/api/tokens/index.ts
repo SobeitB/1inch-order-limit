@@ -22,7 +22,8 @@ export const getPriceToken = async () => {
 };
 
 export const getTokensFx = createEffect(async () => {
-   return await request(GET_TOKENS);
+   const {tokens} = await request(GET_TOKENS);
+   return tokens;
 })
 
 export const getPriceEtherFx = createEffect(async () => {

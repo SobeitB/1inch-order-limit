@@ -18,5 +18,9 @@ export {
 } from './state/stateIsApprove'
 
 export {
-   $getActiveOrders
+   $getActiveOrders,
+   addActiveOrder,
+   conversionOrderData,
+   removeSingleOrder,
+   removeAllOrders,
 } from './state/stateActiveOrder'

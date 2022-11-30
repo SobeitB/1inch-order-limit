@@ -3,15 +3,17 @@ import {useForm} from "effector-forms";
 import {utils} from "ethers";
 import Web3 from "web3";
 import {
+   LimitOrder,
    LimitOrderBuilder,
    LimitOrderPredicateBuilder,
    LimitOrderProtocolFacade,
    Web3ProviderConnector
 } from "@1inch/limit-order-protocol";
 
-import {ADDRESS_LIMIT_ORDER, CHAIN_ID} from "shared/config";
-import {$createOrderForm, $select_erc20} from "entities/OrderLimit";
+import {ActiveOrderType, ADDRESS_LIMIT_ORDER, CHAIN_ID, GET_NEW_ORDER} from "shared/config";
+import {$createOrderForm, $select_erc20, addActiveOrder, conversionOrderData} from "entities/OrderLimit";
 import {AddOrderLimit} from "entities/OrderLimit";
+import {request} from "shared/lib/request";
 
 export const useCreateOrder = () => {
    const selectToken = useStore($select_erc20);
@@ -25,8 +27,11 @@ export const useCreateOrder = () => {
       const price_in_native = selectToken.sell.price_in_native
       const sellDecimals = selectToken.sell.decimals;
 
-      const makerAmount = utils.parseUnits((+price_in_native * +countSell).toFixed(sellDecimals), sellDecimals).toString();
-      const takerAmount = utils.parseUnits((+sellWhatPrice * +countSell).toFixed(sellDecimals), sellDecimals).toString();
+      const makerAmountNumb = +price_in_native * +countSell;
+      const takerAmountNumb = +sellWhatPrice * +countSell;
+
+      const makerAmount = utils.parseUnits(makerAmountNumb.toFixed(sellDecimals), sellDecimals).toString();
+      const takerAmount = utils.parseUnits(takerAmountNumb.toFixed(sellDecimals), sellDecimals).toString();
 
 
       const {ethereum} = window;
@@ -83,13 +88,34 @@ export const useCreateOrder = () => {
          limitOrderTypedData
       );
 
-      await AddOrderLimit({
-         data:limitOrderTypedData.message,
-         orderHash:limitOrderHash,
-         signature,
-         chainId:+CHAIN_ID,
-      });
+      try {
+         const data:any = limitOrderTypedData.message
+         await AddOrderLimit({
+            data,
+            orderHash:limitOrderHash,
+            signature,
+            chainId:+CHAIN_ID,
+         });
 
+         const orderData:ActiveOrderType = {
+            createDateTime:new Date(Date.now() + dateExpires).toISOString(),
+            data,
+            isMakerContract:false,
+            makerAllowance:'',
+            makerBalance:'',
+            makerRate:makerAmountNumb.toString(),
+            orderHash:limitOrderHash,
+            orderInvalidReason:null,
+            remainingMakerAmount:'',
+            signature,
+            takerRate:'',
+         }
+
+         const [convOrderData] = conversionOrderData([orderData])
+         addActiveOrder(convOrderData)
+      } catch (e) {
+         console.log(e)
+      }
    }
 
    return createOrder
