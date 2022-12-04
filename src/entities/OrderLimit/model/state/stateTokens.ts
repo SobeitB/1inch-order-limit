@@ -1,5 +1,5 @@
 import {createApi, createStore} from 'effector'
-import {utils} from "ethers";
+import {BigNumber, utils} from "ethers";
 
 import {
    TokensType,
@@ -41,12 +41,12 @@ export const $select_erc20 = createStore<selectsTokens>({
 const changeErc20Utils = (state:selectsTokens, erc20: { token: TokensInfo, price_native:number }, tokenType:TokensSort) => {
    const {token, price_native} = erc20;
 
-   const decimals:number = token.decimals;
    const price:string = priceToken[token.address];
    const balance:string = balanceToken[token.address].balance;
 
-   const price_in_native:number = +utils.formatUnits(price, decimals);
-   const balanceFormat:string = utils.formatUnits(balance, decimals);
+   const price_in_native:number = +utils.formatUnits(price);
+   const balanceFormat:string = utils.formatUnits(balance);
+   console.log(price_in_native)
 
    return {
       ...state,

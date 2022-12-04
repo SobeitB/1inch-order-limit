@@ -9,7 +9,7 @@ import {
    TokensCurrent,
    TokensCurrentBody
 } from "./styled";
-import {TokensInfo} from "shared/config/type/Tokens.type";
+import {TokensInfo, TokensType} from "shared/config/type/Tokens.type";
 import {TokensSort} from "shared/config";
 import {useNavigationTokens} from "../";
 import {$erc20, $price_eth, changeErc20, setChangeToken} from "entities/OrderLimit";

@@ -13,7 +13,6 @@ import {
 import {ActiveOrderType, ADDRESS_LIMIT_ORDER, CHAIN_ID, GET_NEW_ORDER} from "shared/config";
 import {$createOrderForm, $select_erc20, addActiveOrder, conversionOrderData} from "entities/OrderLimit";
 import {AddOrderLimit} from "entities/OrderLimit";
-import {request} from "shared/lib/request";
 
 export const useCreateOrder = () => {
    const selectToken = useStore($select_erc20);
@@ -24,15 +23,15 @@ export const useCreateOrder = () => {
       const sellWhatPrice = fields.sellPrice.value;
       const dateExpires = +fields.dateExpires.value * 60;
 
-      const price_in_native = selectToken.sell.price_in_native
       const sellDecimals = selectToken.sell.decimals;
 
-      const makerAmountNumb = +price_in_native * +countSell;
+      const makerAmountNumb = +countSell;
       const takerAmountNumb = +sellWhatPrice * +countSell;
 
-      const makerAmount = utils.parseUnits(makerAmountNumb.toFixed(sellDecimals), sellDecimals).toString();
+      const makerAmount = utils.parseUnits(countSell, sellDecimals).toString();
       const takerAmount = utils.parseUnits(takerAmountNumb.toFixed(sellDecimals), sellDecimals).toString();
 
+      console.log(makerAmount)
 
       const {ethereum} = window;
       const [wallet] = await ethereum.request({method:"eth_accounts"})

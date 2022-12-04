@@ -2,8 +2,8 @@ import {useCallback, useEffect, useState} from "react";
 
 import {useDebounce} from "./debounce";
 
-type eventTargetInput = React.ChangeEvent<HTMLInputElement>
-type returnInputSell = {
+export type eventTargetInput = React.ChangeEvent<HTMLInputElement>
+export type returnInputSell = {
    value:string;
    onChange:(value: eventTargetInput) => void
 }

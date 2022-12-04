@@ -35,15 +35,6 @@ export const Order = ({order}:OrderProps) => {
          </Item>
 
          <Item>
-            <ItemTitle>Order rates</ItemTitle>
-
-            <div>
-               <Text>maker: {order.makerRate}</Text>
-               <Text>taker: {order.takerRate}</Text>
-            </div>
-         </Item>
-
-         <Item>
             <ItemTitle>Created</ItemTitle>
 
             <TextCenter>{order.createDateTime}</TextCenter>

@@ -4,8 +4,8 @@ import {Wrapper} from "shared/ui/Wrapper";
 
 import {ChekedTokens} from "widgets/ChekedTokens";
 import {IsConnected} from "widgets/IsConnected";
-import {SellPrice} from "features/SellPrice";
-import {DateExperires} from "features/DateExpires/ui";
+import {SellPrice} from "features/FormCreateOrder";
+import {DateExperires} from "features/FormCreateOrder";
 
 const CreateLimitOrder = () => {
    return(

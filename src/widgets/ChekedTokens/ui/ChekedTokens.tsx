@@ -8,7 +8,7 @@ import {TokensProps, TokensSort} from "shared/config";
 import {TextInfo} from "shared/ui/Text";
 import {WrappedMenu} from "features/MenuTokens";
 import {PriceTokens} from "features/PriceTokens";
-import {InputTokens} from "features/InputTokens";
+import {InputTokens} from "features/FormCreateOrder";
 
 export const ChekedTokens = ({methodChange}:TokensProps) => {
    const select_tokens = useStore($select_erc20);
